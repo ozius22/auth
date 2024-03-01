@@ -1,11 +1,16 @@
 <template>
     <div class="login-form">
+        <nav class="navbar">
+            <a href="/">Back</a>
+        </nav>
+
         <div class="center">
             <h2>Login</h2>
+  
             <form @submit.prevent="handleLogin">
                 <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" id="email" v-model="state.user.email" placeholder="Enter your email">
+                <input type="text" id="email" v-model="state.user.email" placeholder="Enter your email">
                 <p>{{ state.errors && state.errors._data && state.errors._data.errors && state.errors._data.errors.email && state.errors._data.errors.email[0]}}</p>
                 </div>
                 <div class="form-group">
@@ -15,6 +20,8 @@
                 </div>
                 <button type="submit">Login</button>
             </form>
+            
+            <p class="register"><a href="/register">Create an account</a></p>
         </div>
     </div>
   </template>
@@ -55,51 +62,71 @@
   
   
   <style scoped>
-    .center {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    .navbar {
+    position: absolute;
+    top: 40px;
+    left: 80px;
     }
 
-  .login-form {
-    max-width: 600px;
-    margin: 0 auto;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  input[type="email"],
-  input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-  }
-  
-  button {
-    display: block;
-    margin: 0 auto;
-    padding: 10px 15px;
-    font-size: 16px;
-    border-radius: 5px;
-    border: none;
-    color: gray;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: white;
-  }
-  
-  @media (max-width: 768px) {
-    .login-form {
-      max-width: 300px;
+    form div p {
+        color: #FF7F7F;
+    } 
+
+    .register {
+        margin-top: 80px;
     }
-  }
+
+    a {
+        color: blue;
+    }
+    
+    .center {
+        margin-top: 100px;
+        display: flex;
+        flex-direction: column; 
+        align-items: center;
+        justify-content: center;
+    }
+
+    .login-form {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+    
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+    
+    input[type="text"],
+    input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+    
+    button {
+        display: block;
+        margin: 0 auto;
+        padding: 8px 30px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        background-color: white;
+        color: gray;
+        cursor: pointer;
+    }
+    
+    button:hover {
+        background-color: lightgray;
+    }
+    
+    @media (max-width: 768px) {
+        .login-form {
+        max-width: 300px;
+        }
+    }
   </style>
   

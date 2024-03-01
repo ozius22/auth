@@ -1,21 +1,26 @@
 <template>
     <div>
-      <p>Users List</p>
-  
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="t in data.users" :key="t.id">
-            <td>{{ t.name }}</td>
-            <td>{{ t.email }}</td>
-          </tr>
-        </tbody>
-      </table>
+      <nav class="navbar">
+        <a href="/">Log Out</a>
+      </nav>
+
+      <div class="list">
+        <p>Users List</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="t in data.users" :key="t.id">
+              <td>{{ t.name }}</td>
+              <td>{{ t.email }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </template>
   
@@ -24,7 +29,6 @@
     async setup() {
       const data = ref(null);
 
-      // Check if user is logged in on component mount
       onMounted(() => {
         checkLogged();
       });
@@ -40,14 +44,22 @@
         return { data };
       } catch (error) {
         console.error('Error fetching users:', error);
-        // You might want to handle errors more gracefully, for example by showing an error message to the user
       }
     },
 };
   </script>
   
 <style>
-  /* Add your table styles here if needed */
+  .navbar {
+    position: absolute;
+    top: 40px;
+    right: 80px;
+  }
+
+  .list {
+    margin: 80px 40px;
+  }
+
   table {
     width: 100%;
     border-collapse: collapse;
@@ -61,29 +73,6 @@
   }
 
   th {
-    background-color: #f2f2f2;
-  }
-
-  .action-btn {
-    margin-right: 5px;
-    padding: 3px 8px;
-    cursor: pointer;
-    border: none;
-    border-radius: 4px;
-  }
-
-  .view {
-    background-color: green;
-    color: white;
-  }
-
-  .edit {
-    background-color: yellow;
-    color: #333;
-  }
-
-  .delete {
-    background-color: red;
-    color: white;
+    background-color: lightgreen;
   }
 </style>

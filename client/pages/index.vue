@@ -1,24 +1,16 @@
 <template>
   <div>
-    <div class="center">
-      <button @click="goTo('/login')">Log In</button>
-      <button class="but2" @click="goTo('/register')">Sign Up</button>
+    <div class="title">
+      <h1>Welcome</h1>
     </div>
+    <nav class="navbar">
+      <a href="/login">Log In</a>
+    </nav>
   </div>
 </template>
 
-<script>
-export default {
-  methods: {
-    goTo(path) {
-      this.$router.push(path);
-    }
-  }
-}
-</script>
-
 <style>
-.center {
+.title {
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
@@ -26,7 +18,17 @@ export default {
   height: 100vh; 
 }
 
-.but2 {
+.navbar {
+  position: absolute;
+  top: 40px;
+  right: 80px;
+}
+
+.navbar a {
   margin-right: 10px;
+}
+
+a {
+  color: blue;
 }
 </style>
