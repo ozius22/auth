@@ -1,10 +1,6 @@
 <template>
     <div>
-      <nav class="navbar">
-        <a href="/">Log Out</a>
-      </nav>
-
-      <div class="list">
+      <div class="mx-8 mt-5">
         <p>Users List</p>
         <table>
           <thead>
@@ -25,6 +21,10 @@
   </template>
   
   <script>
+  definePageMeta ({
+    layout: 'dashboard'
+  })
+
   export default {
     async setup() {
       const data = ref(null);
@@ -50,16 +50,6 @@
   </script>
   
 <style>
-  .navbar {
-    position: absolute;
-    top: 40px;
-    right: 80px;
-  }
-
-  .list {
-    margin: 80px 40px;
-  }
-
   table {
     width: 100%;
     border-collapse: collapse;
@@ -67,12 +57,11 @@
   }
 
   th, td {
-    border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
   }
 
   th {
-    background-color: lightgreen;
+    background-color: lightskyblue;
   }
 </style>

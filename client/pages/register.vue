@@ -1,11 +1,7 @@
 <template>
   <div class="login-form">
-    <nav class="navbar">
-      <a href="/">Back</a>
-    </nav>
-
     <div class="center">
-      <h2>Register</h2>
+      <h2 class="font-bold mb-10">Register</h2>
       <form @submit.prevent="handleRegister">
         <div class="form-group">
           <label for="name">Name</label>
@@ -25,12 +21,16 @@
         <button type="submit">Register</button>
       </form>
 
-      <p class="login"><a href="/login">Already have an account?</a></p>
+      <p class="login"><nuxt-link href="/login">Already have an account?</nuxt-link></p>
     </div>
   </div>
 </template>
 
 <script setup>
+  definePageMeta ({
+    layout: 'form'
+  })
+
 import { reactive } from 'vue';
 
 const state = reactive({
@@ -70,13 +70,6 @@ async function handleRegister(){
 </script>
 
 <style scoped>
-
-  .navbar {
-    position: absolute;
-    top: 40px;
-    left: 80px;
-  }
-
   form div p {
     color: #FF7F7F;
   } 
@@ -85,12 +78,12 @@ async function handleRegister(){
     margin-top: 80px;
   }
 
-  .login a {
+  .login {
     color: blue;
   }
 
   .center {
-  margin-top: 100px;
+  margin-top: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -118,9 +111,8 @@ async function handleRegister(){
   }
   
   button {
-    margin-top: 20px;
     display: block;
-    margin: 0 auto;
+    margin: 30px auto;
     padding: 8px 30px;
     font-size: 16px;
     border-radius: 5px;
@@ -132,12 +124,7 @@ async function handleRegister(){
   
   button:hover {
     background-color: lightgray;
-  }
-  
-  @media (max-width: 768px) {
-    .login-form {
-      max-width: 300px;
-    }
+    color: white;
   }
   </style>
   

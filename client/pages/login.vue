@@ -1,11 +1,7 @@
 <template>
     <div class="login-form">
-        <nav class="navbar">
-            <a href="/">Back</a>
-        </nav>
-
         <div class="center">
-            <h2>Login</h2>
+            <h2 class="font-bold mb-10">Login</h2>
   
             <form @submit.prevent="handleLogin">
                 <div class="form-group">
@@ -21,12 +17,15 @@
                 <button type="submit">Login</button>
             </form>
             
-            <p class="register"><a href="/register">Create an account</a></p>
+            <p class="register"><nuxt-link to="/register">Create an account</nuxt-link></p>
         </div>
     </div>
   </template>
   
   <script setup>
+  definePageMeta ({
+    layout: 'form'
+  })
   
   const state = reactive({
       errors: null,
@@ -62,12 +61,6 @@
   
   
   <style scoped>
-    .navbar {
-    position: absolute;
-    top: 40px;
-    left: 80px;
-    }
-
     form div p {
         color: #FF7F7F;
     } 
@@ -76,12 +69,12 @@
         margin-top: 80px;
     }
 
-    a {
+    .register a {
         color: blue;
     }
     
     .center {
-        margin-top: 100px;
+        margin-top: 50px;
         display: flex;
         flex-direction: column; 
         align-items: center;
@@ -109,7 +102,7 @@
     
     button {
         display: block;
-        margin: 0 auto;
+        margin: 30px auto;
         padding: 8px 30px;
         font-size: 16px;
         border-radius: 5px;
@@ -121,12 +114,7 @@
     
     button:hover {
         background-color: lightgray;
-    }
-    
-    @media (max-width: 768px) {
-        .login-form {
-        max-width: 300px;
-        }
+        color: white;
     }
   </style>
   
