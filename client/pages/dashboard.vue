@@ -10,7 +10,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="t in data.users" :key="t.id">
+            <tr v-for="t in users" :key="t.id">
               <td>{{ t.name }}</td>
               <td>{{ t.email }}</td>
             </tr>
@@ -18,36 +18,15 @@
         </table>
       </div>
     </div>
-  </template>
+</template>
   
-  <script>
+<script setup>
   definePageMeta ({
     layout: 'dashboard'
-  })
+  });
 
-  export default {
-    async setup() {
-      const data = ref(null);
-
-      onMounted(() => {
-        checkLogged();
-      });
-
-      async function checkLogged() {
-        if (!localStorage.getItem('_token')) {
-            console.log('no token');
-        }
-      }
-      try {
-        const { data } = await useFetch('http://127.0.0.1:8000/api/getUsers/'); 
-  
-        return { data };
-      } catch (error) {
-        console.error('Error fetching users:', error);
-      }
-    },
-};
-  </script>
+  const { data:users } = await useFetch('http://127.0.0.1:8000/api/getUsers');
+</script>
   
 <style>
   table {
