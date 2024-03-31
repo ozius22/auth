@@ -1,37 +1,108 @@
 <template>
-  <div class="login-form">
-    <div class="center">
-      <h2 class="font-bold mb-10">Register</h2>
-      <form @submit.prevent="handleRegister">
-        <div class="form-group">
-          <label for="name">Name</label>
-          <input type="text" id="name" v-model="state.user.name" placeholder="Enter your name">
-          <p>{{ state.errors && state.errors._data && state.errors._data.errors && state.errors._data.errors.name && state.errors._data.errors.name[0]}}</p>
-        </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="text" id="email" v-model="state.user.email" placeholder="Enter your email">
-          <p>{{ state.errors && state.errors._data && state.errors._data.errors && state.errors._data.errors.email && state.errors._data.errors.email[0]}}</p>
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" id="password" v-model="state.user.password" placeholder="Enter your password">
-          <p>{{ state.errors && state.errors._data && state.errors._data.errors && state.errors._data.errors.password && state.errors._data.errors.password[0]}}</p>
-        </div>
-        <button type="submit">Register</button>
-      </form>
-
-      <p class="login"><nuxt-link href="/login">Already have an account?</nuxt-link></p>
-    </div>
+  <div class="flex justify-center items-center h-screen">
+      <div class="w-full max-w-md -mt-28">
+          <h1 class="text-center block text-gray-700 text-lg font-bold mb-2">Register</h1>
+          <Form @submit="handleRegister()" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <div class="mb-4">
+              <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Name</label>
+              <Field type="text"
+                  name="name"
+                  placeholder="Enter your name"
+                  class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-500 focus:ring focus:ring-blue-500"
+                  :rules="validateName"
+                  v-model="state.user.name"
+              />
+              <ErrorMessage class="text-red-500 text-xs italic" name="name"/>
+            </div>  
+            
+            
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email</label>
+                <Field type="text"
+                    name="email"
+                    placeholder="Enter your email"
+                    class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-500 focus:ring focus:ring-blue-500"
+                    :rules="validateEmail"
+                    v-model="state.user.email"
+                />
+                <ErrorMessage class="text-red-500 text-xs italic" name="email"/>
+              </div>
+  
+          <div class="mb-6">
+              <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Password</label>
+              <Field type="password"
+                  name="password"
+                  placeholder="Enter your password"
+                  class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-500 focus:ring focus:ring-blue-500"
+                  :rules="validatePassword"
+                  v-model="state.user.password"
+              />
+              <ErrorMessage class="text-red-500 text-xs italic" name="password"/>
+          </div>
+  
+          <button type="submit" class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+              Login
+          </button>
+          </Form>
+          <p class="text-blue-500 text-sm italic mt-8 text-center"><NuxtLink href="/login">Already have an account?</NuxtLink></p>
+      </div>
   </div>
 </template>
 
 <script setup>
-  definePageMeta ({
-    layout: 'form'
-  })
+  definePageMeta({
+          layout: 'form'
+      });
 
-import { reactive } from 'vue';
+  import { Form, Field, ErrorMessage } from 'vee-validate';
+
+  const validateName = (value) => {
+      // if the field is empty
+      if (!value) {
+      return 'This field is required';
+      }
+
+      // alphanumeric
+      if (!/^[a-zA-Z0-9. ]+$/.test(value)) {
+        return 'Name must contain only alphanumeric characters';
+      }
+      
+      // length
+      if (value.length > 255) {
+          return 'Name too long';
+      }
+
+      return true;
+  };
+
+  const validateEmail = (value) => {
+      // if the field is empty
+      if (!value) {
+      return 'This field is required';
+      }
+
+      // if the field is not a valid email
+      const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+      if (!regex.test(value)) {
+      return 'This field must be a valid email';
+      }
+
+      return true;
+  };
+
+  const validatePassword = (value) => {
+      // if the field is empty
+      if (!value) {
+      return 'This field is required';
+      }
+
+      // length
+      if (value.length < 8) {
+          return 'Password must be at least 8 characters';
+      }
+
+      return true;
+  };
 
 const state = reactive({
     errors: null,
@@ -56,75 +127,14 @@ async function handleRegister(){
   })
 
   if (response.data){
-    console.log('registered success!');
-    console.log(response);
+    alert('Successfully Registered');
     localStorage.setItem('_token', response.data.token);
     navigateTo('/login');
   }
     }
     catch (error){
         state.errors = error.response;
-        console.log('error', error);
+        alert(state.errors && state.errors._data && state.errors._data.errors && state.errors._data.errors.email && state.errors._data.errors.email[0]);
     }
 }
 </script>
-
-<style scoped>
-  form div p {
-    color: #FF7F7F;
-  } 
-
-  .login {
-    margin-top: 80px;
-  }
-
-  .login {
-    color: blue;
-  }
-
-  .center {
-  margin-top: 50px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  }
-
-  .login-form {
-    max-width: 600px;
-    margin: 0 auto;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  input[type="email"],
-  input[type="text"],
-  input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-  }
-  
-  button {
-    display: block;
-    margin: 30px auto;
-    padding: 8px 30px;
-    font-size: 16px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    background-color: white;
-    color: gray;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: lightgray;
-    color: white;
-  }
-  </style>
-  
