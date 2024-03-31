@@ -4,32 +4,32 @@
             <h1 class="text-center block text-gray-700 text-lg font-bold mb-2">Log In</h1>
             <Form @submit="handleLogin()" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                 <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email</label>
-                <Field type="text"
-                    name="email"
-                    placeholder="Enter your email"
-                    class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-500 focus:ring focus:ring-blue-500"
-                    :rules="validateEmail"
-                    v-model="state.user.email"
-                />
-                <ErrorMessage class="text-red-500 text-xs italic" name="email"/>
-            </div>
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email</label>
+                    <Field type="text"
+                        name="email"
+                        placeholder="Enter your email"
+                        class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-500 focus:ring focus:ring-blue-500"
+                        :rules="validateEmail"
+                        v-model="state.user.email"
+                    />
+                    <ErrorMessage class="text-red-500 text-xs italic" name="email"/>
+                </div>
     
-            <div class="mb-6">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Password</label>
-                <Field type="password"
-                    name="password"
-                    placeholder="Enter your password"
-                    class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-500 focus:ring focus:ring-blue-500"
-                    :rules="validatePassword"
-                    v-model="state.user.password"
-                />
-                <ErrorMessage class="text-red-500 text-xs italic" name="password"/>
-            </div>
+                <div class="mb-6">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Password</label>
+                    <Field type="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-blue-500 focus:ring focus:ring-blue-500"
+                        :rules="validatePassword"
+                        v-model="state.user.password"
+                    />
+                    <ErrorMessage class="text-red-500 text-xs italic" name="password"/>
+                </div>
     
-            <button type="submit" class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                Login
-            </button>
+                <button type="submit" class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                    Login
+                </button>
             </Form>
             <p class="text-blue-500 text-sm italic mt-8 text-center"><NuxtLink href="/register">Create an Account</NuxtLink></p>
         </div>

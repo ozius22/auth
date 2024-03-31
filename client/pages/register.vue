@@ -15,7 +15,6 @@
               <ErrorMessage class="text-red-500 text-xs italic" name="name"/>
             </div>  
             
-            
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email</label>
                 <Field type="text"
